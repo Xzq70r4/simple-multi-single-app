@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet'>
+
+    <link href='css/normalize.css' rel='stylesheet'>
+    <link href='css/font-awesome.min.css' rel='stylesheet'>
+    <link href='css/vertical-responsive-menu.min.css' rel='stylesheet'>
+    <link href='css/style.css' rel='stylesheet'>
+    <link href='css/login-form.css' rel='stylesheet'>
+
+</head>
+
+<body>
+<header class="header clearfix">
+<button type="button" id="toggleMenu" class="toggle_menu">
+    <i class="fa fa-bars"></i>
+</button>
+<h1>Admin Menu</h1>
+</header>
+
+<nav class="vertical_nav" id="nav">
+
+    <ul id="js-menu" class="menu">
+
+        <li class="menu--item  menu--item__has_sub_menu">
+
+            <label class="menu--link" title="Item 1">
+                <i class="menu--icon  fa fa-fw fa-user"></i>
+                <span class="menu--label">Item 1</span>
+            </label>
+
+            <ul class="sub_menu">
+                <li class="sub_menu--item">
+                    <a href="#" class="sub_menu--link sub_menu--link__active">Submenu</a>
+                </li>
+                <li class="sub_menu--item">
+                    <a href="#" class="sub_menu--link">Submenu</a>
+                </li>
+                <li class="sub_menu--item">
+                    <a href="#" class="sub_menu--link">Submenu</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu--item">
+            <a href="#" class="menu--link" title="Item 2">
+                <i class="menu--icon  fa fa-fw fa-briefcase"></i>
+                <span class="menu--label">Item 2</span>
+            </a>
+        </li>
+
+        <li class="menu--item">
+            <a href="#" class="menu--link" title="Item 3">
+                <i class="menu--icon  fa fa-fw fa-cog"></i>
+                <span class="menu--label">Item 3</span>
+            </a>
+        </li>
+
+        <li class="menu--item  menu--item__has_sub_menu">
+
+            <label class="menu--link" title="Item 4">
+                <i class="menu--icon  fa fa-fw fa-database"></i>
+                <span class="menu--label">Item 4</span>
+            </label>
+
+            <ul class="sub_menu">
+                <li class="sub_menu--item">
+                    <a href="#" class="sub_menu--link">Submenu</a>
+                </li>
+                <li class="sub_menu--item">
+                    <a href="#" class="sub_menu--link">Submenu</a>
+                </li>
+                <li class="sub_menu--item">
+                    <a href="#" class="sub_menu--link">Submenu</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu--item">
+            <a href="#/logout/" class="menu--link" title="Item 5">
+                <i class="menu--icon  fa fa-fw fa-globe"></i>
+                <span  class="menu--label">Log Out</span>
+            </a>
+        </li>
+
+    </ul>
+
+    <button id="collapse_menu" class="collapse_menu">
+        <i class="collapse_menu--icon  fa fa-fw"></i>
+        <span class="collapse_menu--label">Recolher menu</span>
+    </button>
+
+</nav>
+
+
+<div class="wrapper" id="container">
+
+</div>
+
+<script src="js/libs/jquery.min.js"></script>
+<script src="js/libs/q.js"></script>
+<script src="js/libs/mustache.min.js"></script>
+<script src="js/libs/sammy.js"></script>
+<script src="js/libs/jquery.noty.packaged.min.js"></script>
+
+<script src="js/libs/vertical-responsive-menu.min.js"></script>
+
+<script src="js/models/headers.js"></script>
+<script src="js/models/ajaxRequest.js"></script>
+
+<script src="js/models/userModel.js"></script>
+<script src="js/models/infoContentModel.js"></script>
+<script src="js/models/dishModel.js"></script>
+
+<script src="js/views/homeViews.js"></script>
+<script src="js/views/userViews.js"></script>
+<script src="js/views/infoContentViews.js"></script>
+<script src="js/views/dishViews.js"></script>
+
+<script src="js/controllers/homeController.js"></script>
+<script src="js/controllers/userController.js"></script>
+<script src="js/controllers/infoContentController.js"></script>
+<script src="js/controllers/dishController.js"></script>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>
