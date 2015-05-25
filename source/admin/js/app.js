@@ -7,6 +7,7 @@ var app = app || {};
 
     var headers = app.headers.load(appId, restAPI);
     var requester = app.requester.load();
+
     var userModel = app.userModel.load(baseUrl, requester, headers);
     var infoContentModel = app.infoContentModel.load(baseUrl, requester, headers);
     var dishModel = app.dishModel.load(baseUrl, requester, headers);
@@ -57,9 +58,25 @@ var app = app || {};
             homeController.homeScreen(selector);
         });
 
+        this.get('#/info-contents/', function() {
+            infoContentController.listAllInfoContent(selector);
+        });
+
         this.bind('login', function(e, data) {
             userController.login(data.username, data.password);
         });
+
+        this.bind('showEditInfoContent', function (e, data) {
+            infoContentController.showEditInfoContent(selector, data);
+        });
+
+        this.bind('editInfoContent', function (e, data) {
+            infoContentController.editInfoContent(selector, data);
+        });
+
+        this.bind('changePath', function (e, data) {
+            this.redirect(data);
+        })
     });
 
     app.router.run('#/');

@@ -2,32 +2,58 @@ var app = app || {};
 
 app.userController = (function() {
     function UserController(model, views) {
-        this.model = model;
-        this.viewBag = views;
+        this._model = model;
+        this._viewBag = views;
     }
 
     UserController.prototype.loadLoginPage = function(selector) {
-         this.viewBag.loginView.loadLoginView(selector);
+         this._viewBag.loadLogin(selector);
     };
 
-
     UserController.prototype.login = function(username, password) {
-        return this.model.login(username, password)
+        return this._model.login(username, password)
             .then(function(loginData) {
+                noty({
+                    theme: 'relax',
+                    text: 'You have successfully logged in!',
+                    type: 'success',
+                    timeout: 2000,
+                    closeWith: ['click']
+                });
                 setUserToStorage(loginData);
                 window.location.replace('#/home/');
             }, function(error) {
-                console.log(error);
+                noty({
+                    theme: 'relax',
+                    text: error.responseJSON.error || 'A problem occurred while signing in!',
+                    type: 'error',
+                    timeout: 2000,
+                    closeWith: ['click']
+                });
             })
     };
 
     UserController.prototype.logout = function() {
-        return this.model.logout()
+        return this._model.logout()
             .then(function() {
+                noty({
+                    theme: 'relax',
+                    text: 'You have successfully logged out!',
+                    type: 'success',
+                    timeout: 2000,
+                    closeWith: ['click']
+                });
+
                 clearUserFromStorage();
                 window.location.replace('#/');
             }, function(error) {
-                console.log(error);
+                noty({
+                    theme: 'relax',
+                    text: error.responseJSON.error || 'A problem occurred while signing out!',
+                    type: 'error',
+                    timeout: 2000,
+                    closeWith: ['click']
+                });
             });
 
     };

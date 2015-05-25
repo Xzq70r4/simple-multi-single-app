@@ -2,9 +2,8 @@ var app = app || {};
 
 app.userViews = (function() {
     function UserViews() {
-        this.loginView = {
-            loadLoginView: loadLoginView
-        };
+
+        this.loadLogin = loadLoginView
     }
 
     function loadLoginView (selector) {
