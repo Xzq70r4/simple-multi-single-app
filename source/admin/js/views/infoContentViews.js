@@ -21,7 +21,7 @@ app.infoContentViews = (function() {
     }
 
     function showEditInfoContentView (selector, data) {
-        $.get('templates/editInfoContent.html', function(template) {
+        $.get('templates/edit-info-content.html', function(template) {
             var outHtml = Mustache.render(template, data);
             $(selector).html(outHtml);
         }).then(function() {
@@ -30,8 +30,14 @@ app.infoContentViews = (function() {
                 var description = $('#description').val();
                 var id = $('#edit-info-content').attr('data-id');
 
+                var data = {
+                    title: title.toString().trim(),
+                    description: description.toString().trim(),
+                    id: id
+                }
+
                 $.sammy(function() {
-                    this.trigger('editInfoContent', {title: title, description: description, id: id});
+                    this.trigger('editInfoContent', data);
                 });
 
                 return false;
@@ -44,12 +50,11 @@ app.infoContentViews = (function() {
         var description = $($(element).parent().children()[0]).find('p').text();
         var id = $(element).parent().attr('data-id');
 
-        //console.log(element)
-        //console.log(title)
-        //console.log(description)
-
-
-        return {title:title,  description:description, objectId:id};
+        return {
+            title:title.toString().trim(),
+            description:description.toString().trim(),
+            objectId:id
+        };
     }
 
     return {

@@ -15,7 +15,7 @@ app.infoContentModel = (function() {
         var url = this._serviceUrl + data.id;
         var headers = this._headers.getHeaders(true);
 
-        return this._requester.put(url, headers, data.note);
+        return this._requester.put(url, headers, data.infoContent);
     };
 
     return {

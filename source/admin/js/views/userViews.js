@@ -2,7 +2,6 @@ var app = app || {};
 
 app.userViews = (function() {
     function UserViews() {
-
         this.loadLogin = loadLoginView
     }
 
@@ -15,8 +14,13 @@ app.userViews = (function() {
                 var username = $('#username').val();
                 var password = $('#password').val();
 
+                var data = {
+                    username: username.toString().trim(),
+                    password: password.toLocaleString().trim()
+                }
+
                 $.sammy(function() {
-                    this.trigger('login', {username: username, password: password});
+                    this.trigger('login', data);
                 });
 
                 return false;

@@ -23,13 +23,13 @@ app.infoContentController = (function () {
 
     InfoContentController.prototype.editInfoContent = function (selector, data) {
         var editInfoContentData = {
-            note: {}
+            infoContent: {}
         };
         if (data.title !== '') {
-            editInfoContentData.note.title = data.title;
+            editInfoContentData.infoContent.title = data.title;
         }
         if (data.description !== '') {
-            editInfoContentData.note.description = data.description;
+            editInfoContentData.infoContent.description = data.description;
         }
 
         editInfoContentData.id = data.id;
@@ -38,7 +38,7 @@ app.infoContentController = (function () {
             .then(function (data) {
                 noty({
                     theme: 'relax',
-                    text: "Successfully edited note!",
+                    text: "Successfully edited info content!",
                     type: 'success',
                     timeout: 2000,
                     closeWith: ['click']
@@ -49,15 +49,13 @@ app.infoContentController = (function () {
             }, function (error) {
                 noty({
                     theme: 'relax',
-                    text: error.responseJSON.error || "A problem occurred while trying to edit your note",
+                    text: error.responseJSON.error || "A problem occurred while trying to edit your info content",
                     type: 'error',
                     timeout: 2000,
                     closeWith: ['click']
                 });
             });
     };
-
-
 
     return {
         load: function (model, views) {

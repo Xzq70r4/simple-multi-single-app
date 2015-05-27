@@ -16,7 +16,7 @@ app.requester = (function() {
         return makeRequest('PUT', headers, url, data);
     };
 
-    Requester.prototype.remove = function (url, headers) {
+    Requester.prototype.delete = function (url, headers) {
         return makeRequest('DELETE', headers, url);
     };
 
