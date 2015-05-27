@@ -58,7 +58,9 @@ app.dishController = (function () {
             title: data.title,
             description: data.description,
             ACL : {
-
+                "*": {
+                    "read": true
+                }
             }
         }
 
