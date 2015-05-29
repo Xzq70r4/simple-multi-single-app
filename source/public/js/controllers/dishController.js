@@ -20,12 +20,12 @@ app.dishController = (function () {
                     layout      : 'topCenter',
                     theme       : 'defaultTheme'
                 });
-            })
+            });
     };
 
     return {
         load: function (model, views) {
             return new DishController(model, views);
         }
-    }
+    };
 }());

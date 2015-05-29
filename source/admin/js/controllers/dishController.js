@@ -20,8 +20,8 @@ app.dishController = (function () {
     };
 
     DishController.prototype.listAllDishes = function (selector, page) {
-        var _this = this;
-        var skipPages = (page - 1) * this._dishesPerPage;
+        var _this = this,
+        skipPages = (page - 1) * this._dishesPerPage;
 
         return this._model.listAllDishes(this._dishesPerPage, skipPages)
             .then(function (data) {
@@ -36,9 +36,7 @@ app.dishController = (function () {
                     isEdible : false
                 };
 
-
                 parseInputData(data.results, viewInputData.results);
-
                 _this._viewBag.showDishesView(selector,viewInputData);
             }, function (error) {
                 noty({
@@ -48,24 +46,24 @@ app.dishController = (function () {
                     timeout: 2000,
                     closeWith: ['click']
                 });
-            })
+            });
     };
-
-    DishController.prototype.addDish = function (selector, data) {
+    DishController.prototype.addDish = function (data) {
         var userId = sessionStorage['userId'];
 
         var dish = {
             title: data.title,
             description: data.description,
+            foregroundImage: data.foregroundImageUploaded,
+            thumbnailImage: data.thumbnailImageUploaded,
             ACL : {
                 "*": {
                     "read": true
                 }
             }
-        }
+        };
 
         dish.ACL[userId] = {"write":true,"read":true};
-
 
         this._model.addDish(dish)
             .then(function (data) {
@@ -79,7 +77,6 @@ app.dishController = (function () {
                 $.sammy(function () {
                     this.trigger('changePath', '#/dishes/');
                 });
-
             }, function (error) {
                 noty({
                     theme: 'relax',
@@ -91,7 +88,7 @@ app.dishController = (function () {
             });
     };
 
-    DishController.prototype.editDish = function (selector, data) {
+    DishController.prototype.editDish = function (data) {
         var editDishData = {
             dish: {}
         };
@@ -127,9 +124,9 @@ app.dishController = (function () {
             });
     };
 
-    DishController.prototype.deleteDish = function (selector, id) {
-        console.log('delete' + id)
-        this._model.deleteDish(id)
+    DishController.prototype.deleteDish = function (dishId) {
+
+        this._model.deleteDish(dishId)
             .then(function (data) {
                 noty({
                     theme: 'relax',
@@ -171,5 +168,5 @@ app.dishController = (function () {
         load: function (model, views, dishesPerPage) {
             return new DishController(model, views, dishesPerPage);
         }
-    }
+    };
 }());

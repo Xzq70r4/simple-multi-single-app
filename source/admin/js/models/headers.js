@@ -38,5 +38,5 @@ app.headers = (function() {
 
             return headers;
         }
-    }
+    };
 }());

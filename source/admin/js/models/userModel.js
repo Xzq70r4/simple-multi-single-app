@@ -21,5 +21,5 @@ app.userModel = (function() {
         load: function(baseUrl, requester, headers) {
             return new UserModel(baseUrl, requester, headers);
         }
-    }
+    };
 }());

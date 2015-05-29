@@ -1,6 +1,6 @@
 var app = app || {};
 
-app.userController = (function() {
+app.userController = (function () {
     function UserController(model, views) {
         this._model = model;
         this._viewBag = views;
@@ -12,7 +12,7 @@ app.userController = (function() {
 
     UserController.prototype.login = function(username, password) {
         return this._model.login(username, password)
-            .then(function(loginData) {
+            .then(function (loginData) {
                 noty({
                     theme: 'relax',
                     text: 'You have successfully logged in!',
@@ -22,7 +22,7 @@ app.userController = (function() {
                 });
                 setUserToStorage(loginData);
                 window.location.replace('#/home/');
-            }, function(error) {
+            }, function (error) {
                 noty({
                     theme: 'relax',
                     text: error.responseJSON.error || 'A problem occurred while signing in!',
@@ -30,12 +30,12 @@ app.userController = (function() {
                     timeout: 2000,
                     closeWith: ['click']
                 });
-            })
+            });
     };
 
-    UserController.prototype.logout = function() {
+    UserController.prototype.logout = function () {
         return this._model.logout()
-            .then(function() {
+            .then(function () {
                 noty({
                     theme: 'relax',
                     text: 'You have successfully logged out!',
@@ -46,7 +46,7 @@ app.userController = (function() {
 
                 clearUserFromStorage();
                 window.location.replace('#/');
-            }, function(error) {
+            }, function (error) {
                 noty({
                     theme: 'relax',
                     text: error.responseJSON.error || 'A problem occurred while signing out!',
@@ -55,7 +55,6 @@ app.userController = (function() {
                     closeWith: ['click']
                 });
             });
-
     };
 
     function setUserToStorage(data) {
@@ -74,5 +73,5 @@ app.userController = (function() {
         load : function(model, views) {
             return new UserController(model, views);
         }
-    }
+    };
 }());

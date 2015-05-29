@@ -1,12 +1,12 @@
 var app = app || {};
 
-app.userViews = (function() {
+app.userViews = (function () {
     function UserViews() {
-        this.loadLogin = loadLoginView
+        this.loadLogin = loadLoginView;
     }
 
-    function loadLoginView (selector) {
-        $.get('templates/login.html', function(template) {
+    function loadLoginView(selector) {
+        $.get('templates/login.html', function (template) {
             var outHtml = Mustache.render(template);
             $(selector).html(outHtml);
         }).then(function() {
@@ -17,21 +17,21 @@ app.userViews = (function() {
                 var data = {
                     username: username.toString().trim(),
                     password: password.toLocaleString().trim()
-                }
+                };
 
-                $.sammy(function() {
+                $.sammy(function () {
                     this.trigger('login', data);
                 });
 
                 return false;
-            })
+            });
         }).done();
 
     }
 
     return {
-        load: function() {
+        load: function () {
             return new UserViews();
         }
-    }
+    };
 }());

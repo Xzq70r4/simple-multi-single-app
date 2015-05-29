@@ -40,5 +40,5 @@ app.dishModel = (function() {
         load: function(baseUrl, requester, headers) {
             return new DishModel(baseUrl, requester, headers);
         }
-    }
+    };
 }());

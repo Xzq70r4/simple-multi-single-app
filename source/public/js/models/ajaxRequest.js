@@ -1,6 +1,6 @@
 var app = app || {};
 
-app.requester = (function() {
+app.requester = (function () {
     function Requester() {
     }
 
@@ -43,5 +43,5 @@ app.requester = (function() {
         load: function () {
             return new Requester();
         }
-    }
+    };
 }());

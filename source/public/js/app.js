@@ -1,6 +1,6 @@
 var app = app || {};
 
-(function() {
+(function () {
     var appId= 'Hrf7KnjqLGgZXBcrjun2jeXCN8VQ3mPEY6yCpDw1';
     var restAPI = 'bBaqrI6AMhx7ejsznC5vc06jFuM7x6agPdvqDBie';
     var baseUrl = 'https://api.parse.com/1/';
@@ -25,9 +25,9 @@ var app = app || {};
             welcomeInfoContentId = 'NYfmaaHNEh',
             aboutInfoContentId = 'h3BPIP1dmW',
             menuInfoContentId = 'KHwium6knu',
-            $templateScript = $('body').find('.child[src="js/libs/theme/jquery.template.min.js"]')
+            $templateScript = $('body').find('.child[src="js/libs/theme/jquery.template.min.js"]');
 
-        this.get('#/?(.*)', function() {
+        this.get('#/?(.*)', function () {
             if($templateScript.length < 1) {
                 infoContentController.infoContentById(homeSelector, welcomeInfoContentId);
                 infoContentController.infoContentById(aboutSelector, aboutInfoContentId);

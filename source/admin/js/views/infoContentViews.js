@@ -10,21 +10,21 @@ app.infoContentViews = (function() {
         $.get('templates/info-content-list.html', function (template) {
             var outHtml = Mustache.render(template, data);
             $(selector).html(outHtml);
-        }).then(function() {
+        }).then(function () {
             $('.edit').click(function () {
                 var data = getElementData(this);
                 $.sammy(function () {
                     this.trigger('showEditInfoContent', data);
-                })
+                });
             });
-        }).done()
+        }).done();
     }
 
-    function showEditInfoContentView (selector, data) {
-        $.get('templates/edit-info-content.html', function(template) {
+    function showEditInfoContentView(selector, data) {
+        $.get('templates/edit-info-content.html', function (template) {
             var outHtml = Mustache.render(template, data);
             $(selector).html(outHtml);
-        }).then(function() {
+        }).then(function () {
             $('#editInfoContentButton').click(function() {
                 var title = $('#title').val();
                 var description = $('#description').val();
@@ -34,14 +34,14 @@ app.infoContentViews = (function() {
                     title: title.toString().trim(),
                     description: description.toString().trim(),
                     id: id
-                }
+                };
 
-                $.sammy(function() {
+                $.sammy(function () {
                     this.trigger('editInfoContent', data);
                 });
 
                 return false;
-            })
+            });
         }).done();
     }
 
@@ -51,15 +51,15 @@ app.infoContentViews = (function() {
         var id = $(element).parent().attr('data-id');
 
         return {
-            title:title.toString().trim(),
-            description:description.toString().trim(),
-            objectId:id
+            title : title.toString().trim(),
+            description : description.toString().trim(),
+            objectId : id
         };
     }
 
     return {
-        load: function() {
+        load: function () {
             return new InfoContentViews();
         }
-    }
+    };
 }());

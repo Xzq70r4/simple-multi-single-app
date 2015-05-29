@@ -17,8 +17,14 @@ app.infoContentController = (function () {
             .then(function (data) {
                 _this._viewBag.showInfoContentsView(selector,data);
             }, function (error) {
-                console.log(error);
-            })
+                noty({
+                    theme: 'relax',
+                    text: error.responseJSON.error || "A problem occurred while trying to list all dishes",
+                    type: 'error',
+                    timeout: 2000,
+                    closeWith: ['click']
+                });
+            });
     };
 
     InfoContentController.prototype.editInfoContent = function (selector, data) {
@@ -61,5 +67,5 @@ app.infoContentController = (function () {
         load: function (model, views) {
             return new InfoContentController(model, views);
         }
-    }
+    };
 }());

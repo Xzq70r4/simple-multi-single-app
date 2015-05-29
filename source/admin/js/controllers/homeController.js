@@ -1,6 +1,6 @@
 var app = app || {};
 
-app.homeController = (function() {
+app.homeController = (function () {
     function HomeController(views) {
         this.viewBag = views;
     }
@@ -10,8 +10,8 @@ app.homeController = (function() {
     };
 
     return {
-        load: function(views) {
+        load: function (views) {
             return new HomeController(views);
         }
-    }
+    };
 }());

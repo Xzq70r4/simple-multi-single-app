@@ -20,12 +20,12 @@ app.infoContentController = (function () {
                     layout      : 'topCenter',
                     theme       : 'defaultTheme'
                 });
-            })
+            });
     };
 
     return {
         load: function (model, views) {
             return new InfoContentController(model, views);
         }
-    }
+    };
 }());

@@ -1,6 +1,6 @@
 var app = app || {};
 
-(function() {
+(function () {
     var dishesPerPage = 2;
 
     var appId= 'Hrf7KnjqLGgZXBcrjun2jeXCN8VQ3mPEY6yCpDw1';
@@ -13,6 +13,7 @@ var app = app || {};
     var userModel = app.userModel.load(baseUrl, requester, headers);
     var infoContentModel = app.infoContentModel.load(baseUrl, requester, headers);
     var dishModel = app.dishModel.load(baseUrl, requester, headers);
+    var imageModel = app.imageModel.load(baseUrl, requester);
 
     var homeViews = app.homeViews.load();
     var userViews = app.userViews.load();
@@ -22,6 +23,7 @@ var app = app || {};
     var userController = app.userController.load(userModel, userViews);
     var infoContentController = app.infoContentController.load(infoContentModel, infoContentViews);
     var homeController = app.homeController.load(homeViews);
+    var imageController = app.imageController.load(imageModel);
     var dishController = app.dishController.load(dishModel, dishViews, dishesPerPage);
 
     app.router = Sammy(function () {
@@ -29,7 +31,7 @@ var app = app || {};
 
         this.before(function() {
             var userId = sessionStorage['userId'];
-            if(userId) {
+            if (userId) {
                 $('#nav').show();
             } else {
                 $('nav').hide();
@@ -38,7 +40,7 @@ var app = app || {};
 
         this.before('#/info-contents/', function() {
             var userId = sessionStorage['userId'];
-            if(!userId) {
+            if (!userId) {
                 this.redirect('#/');
                 return false;
             }
@@ -47,7 +49,7 @@ var app = app || {};
 
         this.before('#/dishes/(.*)', function() {
             var userId = sessionStorage['userId'];
-            if(!userId) {
+            if (!userId) {
                 this.redirect('#/');
                 return false;
             }
@@ -56,7 +58,7 @@ var app = app || {};
 
         this.before('#/home/', function() {
             var userId = sessionStorage['userId'];
-            if(!userId) {
+            if (!userId) {
                 this.redirect('#/');
                 return false;
             }
@@ -64,7 +66,7 @@ var app = app || {};
 
         this.before('#/add-dish/', function() {
             var userId = sessionStorage['userId'];
-            if(!userId) {
+            if (!userId) {
                 this.redirect('#/');
                 return false;
             }
@@ -93,7 +95,7 @@ var app = app || {};
         this.get('#/dishes/([-0-9]+)?', function() {
             var page = 1;
 
-            if(this.params['splat'][0]){
+            if (this.params['splat'][0]) {
                 page = this.params['splat'][0];
             }
 
@@ -109,7 +111,12 @@ var app = app || {};
         });
 
         this.bind('addDish', function (e, data) {
-            dishController.addDish(selector, data);
+            dishController.addDish(data);
+        });
+
+        this.bind('uploadImages', function (e, data) {
+
+            imageController.UploadImages(data, 'addDish');
         });
 
         this.bind('showEditDish', function (e, data) {
@@ -125,7 +132,7 @@ var app = app || {};
         });
 
         this.bind('editDish', function (e, data) {
-            dishController.editDish(selector, data);
+            dishController.editDish(data);
         });
 
         this.bind('showDeleteConfirm', function (e, data) {
@@ -133,7 +140,7 @@ var app = app || {};
         });
 
         this.bind('deleteDish', function (e, data) {
-            dishController.deleteDish(selector, data);
+            dishController.deleteDish(data);
         });
 
         this.bind('changePath', function (e, data) {

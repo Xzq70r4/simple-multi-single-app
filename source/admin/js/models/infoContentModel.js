@@ -22,5 +22,5 @@ app.infoContentModel = (function() {
         load: function(baseUrl, requester, headers) {
             return new InfoContentModel(baseUrl, requester, headers);
         }
-    }
+    };
 }());

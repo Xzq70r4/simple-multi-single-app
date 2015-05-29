@@ -7,7 +7,7 @@ app.infoContentModel = (function() {
         this.headers = headers;
     }
 
-    InfoContentModel.prototype.infoContentById = function(infoContentId) {
+    InfoContentModel.prototype.infoContentById = function (infoContentId) {
         return this.requester.get(this.serviceUrl + infoContentId, this.headers.getHeaders(true));
     };
 
@@ -15,5 +15,5 @@ app.infoContentModel = (function() {
         load: function(baseUrl, requester, headers) {
             return new InfoContentModel(baseUrl, requester, headers);
         }
-    }
+    };
 }());

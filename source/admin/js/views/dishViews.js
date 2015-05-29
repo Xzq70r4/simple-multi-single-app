@@ -1,6 +1,6 @@
 var app = app || {};
 
-app.dishViews = (function() {
+app.dishViews = (function () {
     function DishViews() {
         this.showDishesView = showDishesView;
         this.showAddDishView = showAddDishView;
@@ -8,7 +8,7 @@ app.dishViews = (function() {
         this.showDeleteConfirmView = showDeleteConfirmView;
     }
 
-    function showDishesView (selector, data) {
+    function showDishesView(selector, data) {
         $.get('templates/dish-list.html', function (template) {
             var outHtml = Mustache.render(template, data);
             $(selector).html(outHtml);
@@ -18,7 +18,7 @@ app.dishViews = (function() {
                 var data = getElementData(this);
                 $.sammy(function () {
                     this.trigger('showEditDish', data);
-                })
+                });
             });
 
             $('.delete').click(function () {
@@ -26,8 +26,8 @@ app.dishViews = (function() {
                     objectId : $(this).parent().parent().attr('data-id')
                 };
 
-                $.sammy(function() {
-                    this.trigger('showDeleteConfirm', data);
+                $.sammy(function () {
+                    this.trigger('showDeleteConfirm', data.objectId);
                 });
             });
 
@@ -38,40 +38,56 @@ app.dishViews = (function() {
                 hrefTextPrefix: data.pagination.hrefPrefix
             }).pagination('selectPage', data.pagination.selectedPage);
 
-        }).done()
+        }).done();
     }
 
-    function showAddDishView (selector) {
+    function showAddDishView(selector) {
+        var thumbnailFile,
+            foregroundFile;
+
         $.get('templates/add-dish.html', function(template) {
             var outHtml = Mustache.render(template);
             $(selector).html(outHtml);
         }).then(function() {
-            $('#addDishButton').click(function() {
+
+            $('#thumbnail').bind("change", function(e) {
+                var files = e.target.files || e.dataTransfer.files;
+                thumbnailFile = files[0];
+            });
+
+            $('#foreground').bind("change", function(e) {
+                var files = e.target.files || e.dataTransfer.files;
+                foregroundFile = files[0];
+            });
+
+        }).then(function () {
+            $('#addDishButton').click(function () {
                 var title = $('#title').val();
                 var description = $('#description').val();
 
                 var data = {
                     title: title.toString().trim(),
                     description: description.toString().trim(),
-                    ACL : {
+                    thumbnailImage: thumbnailFile,
+                    foregroundImage: foregroundFile
+                };
 
-                    }
-                }
-
-                $.sammy(function() {
-                    this.trigger('addDish',data);
+                $.sammy(function () {
+                    this.trigger('uploadImages',data);
                 });
 
                 return false;
-            })
+            });
         }).done();
     }
 
-    function showEditDishView (selector, data) {
+    function showEditDishView(selector, data) {
+
         $.get('templates/edit-dish.html', function(template) {
             var outHtml = Mustache.render(template, data);
             $(selector).html(outHtml);
-        }).then(function() {
+        }).then(function () {
+
             $('#editDishButton').click(function() {
                 var title = $('#title').val();
                 var description = $('#description').val();
@@ -94,13 +110,13 @@ app.dishViews = (function() {
 
     function showDeleteConfirmView (selector, data) {
         $.get('templates/delete-dish.html', function(template) {
-            var outHtml = Mustache.render(template, data);
+            var outHtml = Mustache.render(template);
             $(selector).html(outHtml);
         }).then(function() {
             $('#deleteDishButton').click(function() {
                 var id = $(this).attr('data-id');
                 $.sammy(function() {
-                    this.trigger('deleteDish', id);
+                    this.trigger('deleteDish', data);
                 });
 
                 return false;
@@ -124,5 +140,5 @@ app.dishViews = (function() {
         load: function() {
             return new DishViews();
         }
-    }
+    };
 }());

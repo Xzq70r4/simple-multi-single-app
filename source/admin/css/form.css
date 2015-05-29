@@ -52,3 +52,10 @@ textarea:focus {
     outline: 0;
     border-color: #4697e4;
 }
+
+#buttons {
+    margin-top: 50px;
+}
+#thumbnail {
+    margin-left: 13px;
+}
