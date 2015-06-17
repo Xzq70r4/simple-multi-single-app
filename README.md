@@ -2,6 +2,7 @@
 This is two single page applications with one Rest API(on cloud parse.com). One application for public and one for admin. On public user can see Restaurant’s menu with dishes and gallery. On admin application only admin can see all data and change info content, and dishes after log in. 
 
 ##powered by:##
+- [REST API - Parse](https://www.parse.com/)
 - [jQuery]( https://jquery.com/)
 - [mustache.js](https://github.com/janl/mustache.js/)
 - [noty.js]( https://github.com/needim/noty)
